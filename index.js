@@ -25,4 +25,5 @@ mysqlssh.connect({
 })
 .catch(err => {
     console.log(err)
+    console.log('Didn\'t work');
 })
