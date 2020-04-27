@@ -3,12 +3,13 @@ const fs = require('fs');
 const homedir = require('os').homedir;
 
 mysqlssh.connect({
-    host: '134.122.75.249:3306',
+    host: '134.122.75.249',
     user: 'root',
     privateKey: fs.readFileSync(homedir+'/../home/.ssh/New1')
 },
 {
     host: '0.0.0.0',
+    port: '3306',
     user: 'Bobl',
     password: 'DeltaHotel11',
     database: 'EventDB'
