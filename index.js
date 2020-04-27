@@ -1,10 +1,11 @@
 const mysqlssh = require('mysql-ssh');
 const fs = require('fs');
+const homedir = require('os').homedir;
 
 mysqlssh.connect({
     host: '134.122.75.249',
     user: 'root',
-    privateKey: fs.readFileSync('home/.ssh/New1')
+    privateKey: fs.readFileSync(homedir+'/.ssh/New1')
 },
 {
     host: '0.0.0.0:3306',
