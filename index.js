@@ -4,7 +4,7 @@ const homedir = require('os').homedir;
 
 mysqlssh.connect({
     host: '134.122.75.249',
-    port: '3306',
+    port: '22',
     user: 'root',
     privateKey: fs.readFileSync(homedir+'/../home/.ssh/New1')
 },
@@ -16,7 +16,7 @@ mysqlssh.connect({
 }
 )
 .then(client => {
-    client.query('SELECT * FROM `users`', function (err, results, fields) {
+    client.query('SELECT * FROM `User`', function (err, results, fields) {
         if (err) throw err
         console.log(results);
         console.log('Success');
