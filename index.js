@@ -2,6 +2,7 @@ const mysqlssh = require('mysql-ssh');
 const fs = require('fs');
 const homedir = require('os').homedir;
 
+console.log('Starting mysqlssh.');
 mysqlssh.connect({
     host: '134.122.75.249',
     port: '3306',
