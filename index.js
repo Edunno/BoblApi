@@ -16,6 +16,7 @@ mysqlssh.connect({
 }
 )
 .then(client => {
+    console.log('Connecting...');
     client.query('SELECT * FROM `User`', function (err, results, fields) {
         if (err) throw err
         console.log(results);
