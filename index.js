@@ -11,6 +11,7 @@ mysqlssh.connect({
 {
     host: '0.0.0.0',
     user: 'Bobl',
+    port: '3306',
     password: 'DeltaHotel11',
     database: 'EventDB'
 }
