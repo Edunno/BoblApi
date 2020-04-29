@@ -1,4 +1,4 @@
-import {SQLConnection} from '../BoblApi/connector';
+import {SQLConnection} from '../BoblApi/connector.js';
 const express = require('express');
 const bodyparser = require('body-parser');
 
