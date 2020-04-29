@@ -1,4 +1,4 @@
-import {SQLConnection} from '../BoblApi/connector.js';
+const conn = require('./connector');
 const express = require('express');
 const bodyparser = require('body-parser');
 
@@ -12,5 +12,5 @@ app.listen(port, () => {
 })
 
 app.get('/Event', (req,res) =>{
-    res.send(SQLConnection);
+    res.send(conn.getSomeData());
 })
