@@ -32,6 +32,7 @@ function getSomeData() {
             console.log('Didn\'t work');
             resHolder += 'Error, could not connect';
         })
+    console.log(resHolder)
     return resHolder;
 }
 function closeConn() {
