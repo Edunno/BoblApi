@@ -12,5 +12,7 @@ app.listen(port, () => {
 })
 
 app.get('/Event', (req,res) =>{
-    res.send(conn.getSomeData());
+    var data = conn.getSomeData();
+    console.log('Data send:\n'+ data);
+    res.send(data);
 })
