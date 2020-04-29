@@ -1,3 +1,4 @@
+import {SQLConnection} from '../BoblApi/connector';
 const express = require('express');
 const bodyparser = require('body-parser');
 
@@ -8,4 +9,8 @@ app.use(bodyparser.json());
 
 app.listen(port, () => {
     console.log('Listening on port '+port);
+})
+
+app.get('/Event', (req,res) =>{
+    res.send(SQLConnection);
 })
