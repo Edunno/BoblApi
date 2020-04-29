@@ -6,7 +6,7 @@ const homedir = require('os').homedir;
 function getSomeData() {
     console.log('Starting mysqlssh.');
     var resHolder = '';
-    mysqlssh.connect({
+    return mysqlssh.connect({
         host: '134.122.75.249',
         user: 'root',
         privateKey: fs.readFileSync(homedir + '/../home/.ssh/New1')
@@ -24,16 +24,14 @@ function getSomeData() {
             client.query('SELECT * FROM `Event`', function (err, results, fields) {
                 if (err) throw err
                 console.log('Success');
-                resHolder += results;
+                return results;
             })
         })
         .catch(err => {
             console.log(err)
             console.log('Didn\'t work');
-            resHolder += 'Error, could not connect';
+            return 'No connection to DB'
         })
-    console.log(resHolder)
-    return resHolder;
 }
 function closeConn() {
     mysqlssh.close();
