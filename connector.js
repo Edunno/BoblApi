@@ -5,6 +5,7 @@ const homedir = require('os').homedir;
 
 function getSomeData() {
     console.log('Starting mysqlssh.');
+    var resHolder;
     mysqlssh.connect({
         host: '134.122.75.249',
         user: 'root',
@@ -24,14 +25,18 @@ function getSomeData() {
                 if (err) throw err
                 console.log(results);
                 console.log('Success');
-                mysqlssh.close()
-                return results;
+                resHolder = results;
             })
         })
         .catch(err => {
             console.log(err)
             console.log('Didn\'t work');
+            resHolder = 'Error, could not connect';
         })
+        return resHolder;
+}
+function closeConn() {
+    mysqlssh.close();
 }
 
-module.exports = { getSomeData }
+module.exports = { getSomeData, closeConn }
