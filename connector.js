@@ -24,13 +24,13 @@ function getSomeData() {
             client.query('SELECT * FROM `Event`', function (err, results, fields) {
                 if (err) throw err
                 console.log('Success');
-                resHolder = results;
+                resHolder += results;
             })
         })
         .catch(err => {
             console.log(err)
             console.log('Didn\'t work');
-            resHolder = 'Error, could not connect';
+            resHolder += 'Error, could not connect';
         })
     return resHolder;
 }
