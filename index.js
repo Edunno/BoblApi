@@ -2,23 +2,17 @@ const conn = require('./connector');
 const controller = require('./controller');
 const express = require('express');
 const bodyparser = require('body-parser');
+const routes = require('./routes');
 
 const port = process.env.port || 2077;
 
-const router = express();
+const app = express();
 
-router.listen(port, () => {
+app.listen(port, () => {
     console.log('Listening on port ' + port);
 })
 
-router.get('/Event', (req, res) => {
-    conn.getSomeData().then(result =>  {
-        console.log('Data send:\n' + result);
-        res.send(result);
-    }).catch(err => {
-        console.log('Promise was rejected'+err);
-    })
-})
+app.use().get('/Event', routes);
 
 
 /*
