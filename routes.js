@@ -4,6 +4,6 @@ const express = require('express');
 
 const router = express.Router();
 
-router.get('/getEvents',controller.getEvents);
+router.get('/getEvents', true ,controller.getEvents);
 
 module.exports = router;
