@@ -6,4 +6,4 @@ const router = express.Router();
 
 router.get('/getEvents',controller.getEvents);
 
-module.exports = {router}
+module.exports = router;
