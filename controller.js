@@ -1,5 +1,4 @@
 const conn = require('./connector');
-const catchAsync = require('./catchAsync');
 const mysqlssh = require('mysql-ssh');
 
 exports.getEvents = async (req, res, next) => {
