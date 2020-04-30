@@ -5,10 +5,20 @@ const bodyparser = require('body-parser');
 
 const port = process.env.port || 2077;
 
-const router = express.Router();
+const router = express();
 
-router.get('/Event', controller.getEvents);
+router.listen(port, () => {
+    console.log('Listening on port ' + port);
+})
 
+router.get('/Event', (req, res) => {
+    conn.getSomeData().then(result =>  {
+        console.log('Data send:\n' + result);
+        res.send(result);
+    }).catch(err => {
+        console.log('Promise was rejected'+err);
+    })
+})
 
 
 /*
