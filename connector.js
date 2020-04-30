@@ -3,7 +3,7 @@ const fs = require('fs');
 const homedir = require('os').homedir;
 
 
-function getSomeData() {
+async function getSomeData() {
     console.log('Starting mysqlssh.');
     var resHolder = '';
     return mysqlssh.connect({
