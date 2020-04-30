@@ -6,7 +6,7 @@ const homedir = require('os').homedir;
 async function getSomeData() {
     console.log('Starting mysqlssh.');
     var resHolder = '';
-    return mysqlssh.connect({
+    mysqlssh.connect({
         host: '134.122.75.249',
         user: 'root',
         privateKey: fs.readFileSync(homedir + '/../home/.ssh/New1')
