@@ -8,11 +8,14 @@ var app = express();
 app.use(bodyparser.json());
 
 app.listen(port, () => {
-    console.log('Listening on port '+port);
+    console.log('Listening on port ' + port);
 })
 
-app.get('/Event', (req,res) =>{
-    var data = conn.getSomeData();
-    console.log('Data send:\n'+ data);
-    res.send(data);
+app.get('/Event', (req, res) => {
+    var data = conn.getSomeData().then(function (result)  {
+        console.log('Data send:\n' + data);
+        res.send(data);
+    }, function (err){
+        console.log('Never recieved promise.');
+    })
 })
