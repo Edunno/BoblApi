@@ -15,7 +15,7 @@ app.get('/Event', (req, res) => {
     conn.getSomeData().then(function (result)  {
         console.log('Data send:\n' + data);
         res.send(result);
-    }, function (err){
-        console.log('Never recieved promise.');
+    }).catch(err => {
+        console.log('Promise was rejected');
     })
 })
