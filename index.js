@@ -12,9 +12,9 @@ app.listen(port, () => {
 })
 
 app.get('/Event', (req, res) => {
-    var data = conn.getSomeData().then(function (result)  {
+    conn.getSomeData().then(function (result)  {
         console.log('Data send:\n' + data);
-        res.send(data);
+        res.send(result);
     }, function (err){
         console.log('Never recieved promise.');
     })
