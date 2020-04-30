@@ -1,7 +1,7 @@
 const conn = require('./connector');
 const mysqlssh = require('mysql-ssh');
 
-getEvents(async (req, res, next) => {
+exports.getEvents(async (req, res, next) => {
     const pool = await mysqlssh.connect(conn.sshConfig, conn.dbConfig);
     const result = await pool.query('SELECT * FROM `Event`', function (err, results, fields) {
         if (err) throw err
@@ -14,5 +14,3 @@ getEvents(async (req, res, next) => {
             return 'No connection to DB'
         })
 });
-
-module.exports = {getEvents};
