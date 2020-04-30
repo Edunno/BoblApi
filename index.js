@@ -12,10 +12,10 @@ app.listen(port, () => {
 })
 
 app.get('/Event', (req, res) => {
-    conn.getSomeData().then(function (result)  {
-        console.log('Data send:\n' + data);
+    conn.getSomeData().then(result =>  {
+        console.log('Data send:\n' + result);
         res.send(result);
     }).catch(err => {
-        console.log('Promise was rejected');
+        console.log('Promise was rejected'+err);
     })
 })
