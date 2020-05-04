@@ -7,7 +7,9 @@ const getEvents = async (req, res, next) => {
         if (err) throw err
         console.log('Success');
         mysqlssh.close();
-        res.send(results);
+        res.status().json({
+          data: result
+        })
     })
         .catch(err => {
             console.log(err)
