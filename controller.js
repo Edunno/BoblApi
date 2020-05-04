@@ -1,7 +1,7 @@
 const conn = require('./connector');
 const mysqlssh = require('mysql-ssh');
 
-exports.getEvents = async (req, res) => {
+const getEvents = async (req, res, next) => {
     const pool = await mysqlssh.connect(conn.sshConfig, conn.dbConfig);
     const result = await pool.query('SELECT * FROM `Event`', function (err, results, fields) {
         if (err) throw err
@@ -16,7 +16,7 @@ exports.getEvents = async (req, res) => {
         })
 }
 
-exports.protect = async (req, res, next) => {
+const protect = async (req, res, next) => {
     next();
   
     if (!token) {
@@ -25,3 +25,5 @@ exports.protect = async (req, res, next) => {
       );
     }
 };
+
+module.exports = {protect, getEvents};
