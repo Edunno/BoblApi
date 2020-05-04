@@ -17,7 +17,7 @@ exports.getEvents = async (req, res, next) => {
 }
 
 exports.protect = async (req, res, next) => {
-    res = true;
+    next();
   
     if (!token) {
       return next(
