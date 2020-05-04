@@ -7,10 +7,21 @@ exports.getEvents = async (req, res, next) => {
         if (err) throw err
         console.log('Success');
         mysqlssh.close();
+        res.results();
     })
         .catch(err => {
             console.log(err)
             console.log('Didn\'t work');
             return 'No connection to DB'
         })
+}
+
+exports.protect = async (req, res, next) => {
+    res = true;
+  
+    if (!token) {
+      return next(
+        new AppError("You are not logged in! Please log in to get access.", 401)
+      );
+    }
 };
