@@ -7,9 +7,7 @@ const getEvents = async (req, res, next) => {
         if (err) throw err
         console.log('Success');
         mysqlssh.close();
-        res.status().json({
-          data: result
-        })
+        res.send(results);
     })
         .catch(err => {
             console.log(err)
@@ -17,7 +15,7 @@ const getEvents = async (req, res, next) => {
             return 'No connection to DB'
         })
 }
-
+/*
 const protect = async (req, res, next) => {
     next();
   
@@ -27,5 +25,5 @@ const protect = async (req, res, next) => {
       );
     }
 };
-
-module.exports = {protect, getEvents};
+*/
+module.exports = { getEvents};
