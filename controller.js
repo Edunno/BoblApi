@@ -12,8 +12,21 @@ const getEvents = async (req, res, next) => {
         .catch(err => {
             console.log(err)
             console.log('Didn\'t work');
-            return 'No connection to DB'
+            res.send('No connection to DB');
         })
+}
+
+const createEvent = async (req, res, next) => {
+  const pool = await mysqlssh.connect(conn.sshConfig, conn.dbConfig);
+  const results = await pool.query('INSERT INTO Event (title, adress, start_time) VALUES ('+ req.event.title +', ' + req.event.adress + ', ' + req.event.start_time + ');', function(err , results, fields) {
+    if (err) throw err;
+    res.send(results)
+  })
+  .catch(err => {
+    console.log(err);
+    console.log('Didn\'t work');
+    res.send('No connection to DB');
+  })
 }
 /*
 const protect = async (req, res, next) => {
@@ -26,4 +39,4 @@ const protect = async (req, res, next) => {
     }
 };
 */
-module.exports = { getEvents};
+module.exports = { getEvents, createEvent};
