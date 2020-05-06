@@ -13,7 +13,7 @@ app.listen(port, () => {
 })
 
 app.use('/Event', controller.getEvents);
-app.use('/Event/create', controller.createEvent);
+app.use('/Else', controller.createEvent);
 
 
 /*
