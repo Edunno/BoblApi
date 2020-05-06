@@ -19,7 +19,7 @@ const getEvents = async (req, res, next) => {
 const createEvent = async (req, res, next) => {
   const pool = await mysqlssh.connect(conn.sshConfig, conn.dbConfig);
   //const results = await pool.query('INSERT INTO Event (title, adress, start_time) VALUES (\'Træn\', \'Bornholm 80\', \'2020-08-20 20:20:20\');', function(err , results, fields) {
-  const results = await pool.query('INSERT INTO Event (title, adress, start_time) VALUES (\''+ req.event.title +'\', \''+ req.event.adress +'\', \''+ req.event.start_time +'\');', function(err , results, fields) {
+  const results = await pool.query('INSERT INTO Event (title, adress, start_time) VALUES (\''+ req.params.event.title +'\', \''+ req.params.event.adress +'\', \''+ req.params.event.start_time +'\');', function(err , results, fields) {
     if (err) throw err;
     res.send(results)
   })
