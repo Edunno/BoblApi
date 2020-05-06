@@ -12,8 +12,7 @@ app.listen(port, () => {
     console.log('Listening on port ' + port);
 })
 
-app.use('/Event', controller.getEvents);
-app.use('/Else', controller.createEvent);
+app.use('/Event', routes);
 
 
 /*
