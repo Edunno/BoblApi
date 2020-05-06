@@ -8,12 +8,13 @@ const port = process.env.port || 2077;
 
 const app = express();
 
-app.listen(port, () => {
-    console.log('Listening on port ' + port);
-})
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use('/Event', routes);
 
+
+app.listen(port, () => {
+    console.log('Listening on port ' + port);
+})
 
 /*
 app.listen(port, () => {
