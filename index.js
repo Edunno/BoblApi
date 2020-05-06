@@ -8,7 +8,8 @@ const port = process.env.port || 2077;
 
 const app = express();
 
-app.use(bodyparser.urlencoded({ extended: true }));
+app.use(bodyparser.urlencoded({ extended: false }));
+app.use(bodyparser.json())
 app.use('/Event', routes);
 
 
