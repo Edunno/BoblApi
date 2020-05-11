@@ -1,8 +1,6 @@
-const conn = require('./connector');
-const controller = require('./controller');
 const express = require('express');
 const bodyparser = require('body-parser');
-const routes = require('./routes');
+const eventroutes = require('./eventrouter');
 
 const port = process.env.port || 2077;
 
@@ -10,7 +8,7 @@ const app = express();
 
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json())
-app.use('/Event', routes);
+app.use('/Event', eventroutes);
 
 
 app.listen(port, () => {
