@@ -34,7 +34,11 @@ const getEventById = async (req, res, next) => {
   const results = await pool.query(sql, [req.body.eventID], function (err, results, fields) {
     if (err) throw err;
     mysqlssh.close();
-    res.send(results)
+    var resultSet = {
+      status : "200",
+      data : results
+    }
+    res.send(resultSet);
   })
     .catch(err => {
       console.log(err);
@@ -50,7 +54,11 @@ const getEventByOrganizer = async (req, res, next) => {
   const results = await pool.query(sql, [req.body.orgId], function (err, results, fields) {
     if (err) throw err;
     mysqlssh.close();
-    res.send(results)
+    var resultSet = {
+      status : "200",
+      data : results
+    }
+    res.send(resultSet);
   })
     .catch(err => {
       console.log(err);
@@ -66,7 +74,11 @@ const getEventByDate = async (req, res, next) => {
   const results = await pool.query(sql, [req.body.dayStart], function (err, results, fields) {
     if (err) throw err;
     mysqlssh.close();
-    res.send(results)
+    var resultSet = {
+      status : "200",
+      data : results
+    }
+    res.send(resultSet);
   })
     .catch(err => {
       console.log(err);
@@ -82,7 +94,11 @@ const getEventByPlace = async (req, res, next) => {
   const results = await pool.query(sql, [req.body.place], function (err, results, fields) {
     if (err) throw err;
     mysqlssh.close();
-    res.send(results)
+    var resultSet = {
+      status : "200",
+      data : results
+    }
+    res.send(resultSet);
   })
     .catch(err => {
       console.log(err);
@@ -98,7 +114,11 @@ const getOrgByUserID = async (req, res, next) => {
   const results = await pool.query(sql, [req.body.orgId], function (err, results, fields) {
     if (err) throw err;
     mysqlssh.close();
-    res.send(results)
+    var resultSet = {
+      status : "200",
+      data : results
+    }
+    res.send(resultSet);
   })
     .catch(err => {
       console.log(err);
@@ -114,7 +134,11 @@ const getAllOrg = async (req, res, next) => {
   const results = await pool.query(sql, function (err, results, fields) {
     if (err) throw err;
     mysqlssh.close();
-    res.send(results)
+    var resultSet = {
+      status : "200",
+      data : results
+    }
+    res.send(resultSet);
   })
     .catch(err => {
       console.log(err);
@@ -130,7 +154,11 @@ const getUserByEventId = async (req, res, next) => {
   const results = await pool.query(sql, [req.body.eventID], function (err, results, fields) {
     if (err) throw err;
     mysqlssh.close();
-    res.send(results)
+    var resultSet = {
+      status : "200",
+      data : results
+    }
+    res.send(resultSet);
   })
     .catch(err => {
       console.log(err);
@@ -146,7 +174,11 @@ const getEventByUserId = async (req, res, next) => {
   const results = await pool.query(sql, [req.body.userID], function (err, results, fields) {
     if (err) throw err;
     mysqlssh.close();
-    res.send(results)
+    var resultSet = {
+      status : "200",
+      data : results
+    }
+    res.send(resultSet);
   })
     .catch(err => {
       console.log(err);
@@ -161,7 +193,11 @@ const createEvent = async (req, res, next) => {
   const results = await pool.query(sql, [req.body.title, req.body.adress, req.body.startday, req.body.starttime], function (err, results, fields) {
     if (err) throw err;
     mysqlssh.close();
-    res.send(results)
+    var resultSet = {
+      status : "200",
+      data : results
+    }
+    res.send(resultSet);
   })
     .catch(err => {
       console.log(err);
@@ -177,7 +213,11 @@ const createUserEvent = async (req, res, next) => {
   const results = await pool.query(sql, [req.body.eventID, req.body.userID], function (err, resilts, fields) {
     if (err) throw err;
     mysqlssh.close();
-    res.send(results)
+    var resultSet = {
+      status : "200",
+      data : results
+    }
+    res.send(resultSet);
   })
     .catch(err => {
       console.log(err);
@@ -193,7 +233,11 @@ const createOrganizer = async (req, res, next) => {
   const results = await pool.query(sql, [req.body.userID], function (err, resilts, fields) {
     if (err) throw err;
     mysqlssh.close();
-    res.send(results)
+    var resultSet = {
+      status : "200",
+      data : results
+    }
+    res.send(resultSet);
   })
     .catch(err => {
       console.log(err);
@@ -209,7 +253,11 @@ const createUser = async (req, res, next) => {
   const results = await pool.query(sql, [req.body.userID], function (err, resilts, fields) {
     if (err) throw err;
     mysqlssh.close();
-    res.send(results)
+    var resultSet = {
+      status : "200",
+      data : results
+    }
+    res.send(resultSet);
   })
     .catch(err => {
       console.log(err);
@@ -225,7 +273,11 @@ const deleteEvent = async (req, res, next) => {
   const results = await pool.query(sql, [req.body.eventID], function (err, resilts, fields) {
     if (err) throw err;
     mysqlssh.close();
-    res.send(results)
+    var resultSet = {
+      status : "200",
+      data : results
+    }
+    res.send(resultSet);
   })
     .catch(err => {
       console.log(err);
