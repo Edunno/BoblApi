@@ -16,7 +16,7 @@ const getAllEvents = async (req, res, next) => {
     mysqlssh.close();
     var resultSet = {
       status : "200",
-      data : result
+      data : results
     }
     res.send(resultSet);
   })
