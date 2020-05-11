@@ -14,7 +14,11 @@ const getAllEvents = async (req, res, next) => {
     if (err) throw err
     console.log('Success');
     mysqlssh.close();
-    res.send(results);
+    var resultSet = {
+      status : "200",
+      data : result
+    }
+    res.send(resultSet);
   })
     .catch(err => {
       console.log(err)
