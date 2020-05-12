@@ -12,7 +12,21 @@ app.use(bodyparser.json())
 app.use('/Event', eventroutes);
 app.use('/Organizer', orgrouter);
 
+app.all("*", (req, res, next) => {
+    console.log("Cannot find the specified route: " + req.route.path);
+    next();
+});
 
+app.use(async function (err, req, res, next) {
+    if (!err) {
+        return next();
+    }
+    // console.log(err)
+    // show error response on page for clients who get an error
+    res
+        .status(err.httpStatusCode || 500)
+        .send({ error: "Oops! An error has occurred." });
+});
 
 app.listen(port, () => {
     console.log('Listening on port ' + port);
