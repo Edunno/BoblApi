@@ -15,8 +15,8 @@ const getAllEvents = async (req, res, next) => {
     console.log('Success');
     mysqlssh.close();
     var resultSet = {
-      status : "200",
-      data : results
+      status: "200",
+      data: results
     }
     res.send(resultSet);
   })
@@ -35,8 +35,8 @@ const getEventById = async (req, res, next) => {
     if (err) throw err;
     mysqlssh.close();
     var resultSet = {
-      status : "200",
-      data : results
+      status: "200",
+      data: results
     }
     res.send(resultSet);
   })
@@ -55,8 +55,8 @@ const getEventByOrganizer = async (req, res, next) => {
     if (err) throw err;
     mysqlssh.close();
     var resultSet = {
-      status : "200",
-      data : results
+      status: "200",
+      data: results
     }
     res.send(resultSet);
   })
@@ -75,8 +75,8 @@ const getEventByDate = async (req, res, next) => {
     if (err) throw err;
     mysqlssh.close();
     var resultSet = {
-      status : "200",
-      data : results
+      status: "200",
+      data: results
     }
     res.send(resultSet);
   })
@@ -95,8 +95,8 @@ const getEventByPlace = async (req, res, next) => {
     if (err) throw err;
     mysqlssh.close();
     var resultSet = {
-      status : "200",
-      data : results
+      status: "200",
+      data: results
     }
     res.send(resultSet);
   })
@@ -115,8 +115,8 @@ const getOrgByUserID = async (req, res, next) => {
     if (err) throw err;
     mysqlssh.close();
     var resultSet = {
-      status : "200",
-      data : results
+      status: "200",
+      data: results
     }
     res.send(resultSet);
   })
@@ -135,8 +135,8 @@ const getAllOrg = async (req, res, next) => {
     if (err) throw err;
     mysqlssh.close();
     var resultSet = {
-      status : "200",
-      data : results
+      status: "200",
+      data: results
     }
     res.send(resultSet);
   })
@@ -155,8 +155,8 @@ const getUserByEventId = async (req, res, next) => {
     if (err) throw err;
     mysqlssh.close();
     var resultSet = {
-      status : "200",
-      data : results
+      status: "200",
+      data: results
     }
     res.send(resultSet);
   })
@@ -175,8 +175,8 @@ const getEventByUserId = async (req, res, next) => {
     if (err) throw err;
     mysqlssh.close();
     var resultSet = {
-      status : "200",
-      data : results
+      status: "200",
+      data: results
     }
     res.send(resultSet);
   })
@@ -190,17 +190,17 @@ const getEventByUserId = async (req, res, next) => {
 const createEvent = async (req, res, next) => {
   const pool = await mysqlssh.connect(conn.sshConfig, conn.dbConfig);
   var conditions = [];
-  let sqlStart = 'INSERT INTO `Event` (title, adress, start_day, start_time';
-  let sqlEnd = ') VALUES (?,?,?,?';
+  let sqlStart = 'INSERT INTO `Event` (title, adress, start_day, start_time, end_time, place';
+  let sqlEnd = ') VALUES (?,?,?,?,?,?';
   conditions.push(req.body.title);
   conditions.push(req.body.address);
   conditions.push(req.body.startday);
   conditions.push(req.body.starttime);
+  conditions.push(req.body.endtime);
+  conditions.push(req.body.place);
 
   //if (typeof req.body.endtime !== 'undefined') {
-    sqlStart += ', end_time';
-    sqlEnd += ',?';
-    conditions.push(req.body.endtime);
+
   //}
   if (typeof req.body.description !== 'undefined') {
     sqlStart += ', description';
@@ -208,9 +208,7 @@ const createEvent = async (req, res, next) => {
     conditions.push(req.body.description);
   }
   //if (typeof req.body.place !== 'undefined') {
-    sqlStart += ', place';
-    sqlEnd += ',?';
-    conditions.push(req.body.place);
+
   //}
   if (typeof req.body.organizerid !== 'undefined') {
     sqlStart += ', organizer_id';
@@ -229,8 +227,8 @@ const createEvent = async (req, res, next) => {
     if (err) throw err;
     mysqlssh.close();
     var resultSet = {
-      status : "200",
-      data : results
+      status: "200",
+      data: results
     }
     res.send(resultSet);
   })
@@ -249,8 +247,8 @@ const createUserEvent = async (req, res, next) => {
     if (err) throw err;
     mysqlssh.close();
     var resultSet = {
-      status : "200",
-      data : results
+      status: "200",
+      data: results
     }
     res.send(resultSet);
   })
@@ -269,8 +267,8 @@ const createOrganizer = async (req, res, next) => {
     if (err) throw err;
     mysqlssh.close();
     var resultSet = {
-      status : "200",
-      data : results
+      status: "200",
+      data: results
     }
     res.send(resultSet);
   })
@@ -289,8 +287,8 @@ const createUser = async (req, res, next) => {
     if (err) throw err;
     mysqlssh.close();
     var resultSet = {
-      status : "200",
-      data : results
+      status: "200",
+      data: results
     }
     res.send(resultSet);
   })
@@ -309,8 +307,8 @@ const deleteEvent = async (req, res, next) => {
     if (err) throw err;
     mysqlssh.close();
     var resultSet = {
-      status : "200",
-      data : results
+      status: "200",
+      data: results
     }
     res.send(resultSet);
   })
@@ -335,7 +333,8 @@ const getEventByOrganizer = async (req, res, next) => {
   });
 }
 */
-module.exports = { getAllEvents, createEvent, getEventById, getEventByOrganizer, 
-  getEventByDate, getEventByPlace, getOrgByUserID, getAllOrg, getUserByEventId, 
+module.exports = {
+  getAllEvents, createEvent, getEventById, getEventByOrganizer,
+  getEventByDate, getEventByPlace, getOrgByUserID, getAllOrg, getUserByEventId,
   getEventByUserId, createUserEvent, createOrganizer, createUser, deleteEvent
 };
