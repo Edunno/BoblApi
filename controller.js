@@ -197,21 +197,21 @@ const createEvent = async (req, res, next) => {
   conditions.push(req.body.startday);
   conditions.push(req.body.starttime);
 
-  if (typeof req.body.endtime !== 'undefined') {
+  //if (typeof req.body.endtime !== 'undefined') {
     sqlStart += ', end_time';
     sqlEnd += ',?';
     conditions.push(req.body.endtime);
-  }
+  //}
   if (typeof req.body.description !== 'undefined') {
     sqlStart += ', description';
     sqlEnd += ',?';
     conditions.push(req.body.description);
   }
-  if (typeof req.body.place !== 'undefined') {
+  //if (typeof req.body.place !== 'undefined') {
     sqlStart += ', place';
     sqlEnd += ',?';
     conditions.push(req.body.place);
-  }
+  //}
   if (typeof req.body.organizerid !== 'undefined') {
     sqlStart += ', organizer_id';
     sqlEnd += ',?';
