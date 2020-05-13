@@ -190,27 +190,26 @@ const getEventByUserId = async (req, res, next) => {
 const createEvent = async (req, res, next) => {
   const pool = await mysqlssh.connect(conn.sshConfig, conn.dbConfig);
   var conditions = [];
-  let sqlStart = 'INSERT INTO `Event` (title, adress, start_day, start_time, description, place';
-  let sqlEnd = ') VALUES (?,?,?,?,?,?';
+  let sqlStart = 'INSERT INTO `Event` (title, adress, start_day, start_time,';
+  let sqlEnd = ') VALUES (?,?,?,?';
   conditions.push(req.body.title);
   conditions.push(req.body.address);
   conditions.push(req.body.startday);
   conditions.push(req.body.starttime);
-  conditions.push(req.body.description);
-  conditions.push(req.body.place);
 
   //if (typeof req.body.endtime !== 'undefined') {
 
   //}
-  /*
   if (typeof req.body.description !== 'undefined') {
     sqlStart += ', description';
     sqlEnd += ',?';
     conditions.push(req.body.description);
-  }*/
-  //if (typeof req.body.place !== 'undefined') {
-
-  //}
+  }
+  if (typeof req.body.place !== 'undefined') {
+    sqlStart += ', place';
+    sqlEnd += ',?';
+    conditions.push(req.body.place);
+  }
   if (typeof req.body.organizerid !== 'undefined') {
     sqlStart += ', organizer_id';
     sqlEnd += ',?';
