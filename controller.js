@@ -197,11 +197,6 @@ const createEvent = async (req, res, next) => {
   conditions.push(req.body.startday);
   conditions.push(req.body.starttime);
 
-  if (typeof req.body.endday !== 'undefined') {
-    sqlStart += ',end_day';
-    sqlEnd += ',?';
-    conditions.push(req.body.endday);
-  }
   if (typeof req.body.endtime !== 'undefined') {
     sqlStart += ',end_time';
     sqlEnd += ',?';
