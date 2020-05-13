@@ -219,11 +219,6 @@ const createEvent = async (req, res, next) => {
     sqlEnd += ',?';
     conditions.push(req.body.organizerid);
   }
-  if (typeof req.body !== 'undefined') {
-    sqlStart += '';
-    sqlEnd += ',?';
-    conditions.push();
-  }
   /*
   if (typeof req.body !== 'undefined') {
     sqlStart += '';
