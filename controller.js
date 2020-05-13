@@ -190,23 +190,24 @@ const getEventByUserId = async (req, res, next) => {
 const createEvent = async (req, res, next) => {
   const pool = await mysqlssh.connect(conn.sshConfig, conn.dbConfig);
   var conditions = [];
-  let sqlStart = 'INSERT INTO `Event` (title, adress, start_day, start_time, end_time, place';
+  let sqlStart = 'INSERT INTO `Event` (title, adress, start_day, start_time, description, place';
   let sqlEnd = ') VALUES (?,?,?,?,?,?';
   conditions.push(req.body.title);
   conditions.push(req.body.address);
   conditions.push(req.body.startday);
   conditions.push(req.body.starttime);
-  conditions.push(req.body.endtime);
+  conditions.push(req.body.description);
   conditions.push(req.body.place);
 
   //if (typeof req.body.endtime !== 'undefined') {
 
   //}
+  /*
   if (typeof req.body.description !== 'undefined') {
     sqlStart += ', description';
     sqlEnd += ',?';
     conditions.push(req.body.description);
-  }
+  }*/
   //if (typeof req.body.place !== 'undefined') {
 
   //}
@@ -223,7 +224,7 @@ const createEvent = async (req, res, next) => {
   }
   */
   let sql = sqlStart + sqlEnd + ');';
-  const results = await pool.query(sql, [req.body.title,req.body.address,req.body.startday,req.body.starttime,req.body.endtime,req.body.place], function (err, results, fields) {
+  const results = await pool.query(sql, [req.body.title,req.body.address,req.body.startday,req.body.starttime,req.body.description,req.body.place], function (err, results, fields) {
     if (err) throw err;
     mysqlssh.close();
     var resultSet = {
