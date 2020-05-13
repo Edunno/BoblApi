@@ -229,7 +229,7 @@ const createEvent = async (req, res, next) => {
     conditions.push();
   }
   */
-  sqlStart += sqlEnd + ');';
+  let sql = sqlStart + sqlEnd + ');';
   const results = await pool.query(sql, conditions.values, function (err, results, fields) {
     if (err) throw err;
     mysqlssh.close();
