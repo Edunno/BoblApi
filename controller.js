@@ -223,7 +223,7 @@ const createEvent = async (req, res, next) => {
   }
   */
   let sql = sqlStart + sqlEnd + ');';
-  const results = await pool.query(sql, conditions.values, function (err, results, fields) {
+  const results = await pool.query(sql, [req.body.title,req.body.address,req.body.startday,req.body.starttime,req.body.endtime,req.body.place], function (err, results, fields) {
     if (err) throw err;
     mysqlssh.close();
     var resultSet = {
