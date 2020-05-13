@@ -192,7 +192,10 @@ const createEvent = async (req, res, next) => {
   var conditions = [];
   let sqlStart = 'INSERT INTO `Event` (title, adress, start_day, start_time';
   let sqlEnd = ') VALUES (?,?,?,?';
-  conditions.push(req.body.title).push(req.body.adress).push(req.body.startday).push(req.body.starttime);
+  conditions.push(req.body.title);
+  conditions.push(req.body.adress);
+  conditions.push(req.body.startday);
+  conditions.push(req.body.starttime);
 
   if (typeof req.body.endday !== 'undefined') {
     sqlStart += 'end_day';
