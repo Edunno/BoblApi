@@ -189,8 +189,50 @@ const getEventByUserId = async (req, res, next) => {
 
 const createEvent = async (req, res, next) => {
   const pool = await mysqlssh.connect(conn.sshConfig, conn.dbConfig);
-  let sql = 'INSERT INTO `Event` (title, adress, start_day, start_time) VALUES (?,?,?,?);';
-  const results = await pool.query(sql, [req.body.title, req.body.adress, req.body.startday, req.body.starttime], function (err, results, fields) {
+  var conditions = [];
+  let sqlStart = 'INSERT INTO `Event` (title, adress, start_day, start_time';
+  let sqlEnd = ') VALUES (?,?,?,?';
+  conditions.push(req.body.title).push(req.body.adress).push(req.body.startday).push(req.body.starttime);
+
+  if (typeof req.body.endday !== 'undefined') {
+    sqlStart += 'end_day';
+    sqlEnd += ',?';
+    conditions.push(req.body.endday);
+  }
+  if (typeof req.body.endtime !== 'undefined') {
+    sqlStart += 'end_time';
+    sqlEnd += ',?';
+    conditions.push(req.body.endtime);
+  }
+  if (typeof req.body.description !== 'undefined') {
+    sqlStart += 'description';
+    sqlEnd += ',?';
+    conditions.push(req.body.description);
+  }
+  if (typeof req.body.place !== 'undefined') {
+    sqlStart += 'place';
+    sqlEnd += ',?';
+    conditions.push(req.body.place);
+  }
+  if (typeof req.body.organizerid !== 'undefined') {
+    sqlStart += 'organizer_id';
+    sqlEnd += ',?';
+    conditions.push(req.body.organizerid);
+  }
+  if (typeof req.body !== 'undefined') {
+    sqlStart += '';
+    sqlEnd += ',?';
+    conditions.push();
+  }
+  /*
+  if (typeof req.body !== 'undefined') {
+    sqlStart += '';
+    sqlEnd += ',?';
+    conditions.push();
+  }
+  */
+  sqlStart += sqlEnd + ');';
+  const results = await pool.query(sql, conditions.values, function (err, results, fields) {
     if (err) throw err;
     mysqlssh.close();
     var resultSet = {
