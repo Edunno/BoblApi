@@ -190,7 +190,7 @@ const getEventByUserId = async (req, res, next) => {
 const createEvent = async (req, res, next) => {
   const pool = await mysqlssh.connect(conn.sshConfig, conn.dbConfig);
   var conditions = [];
-  let sqlStart = 'INSERT INTO `Event` (title, adress, start_day, start_time,';
+  let sqlStart = 'INSERT INTO `Event` (title, adress, start_day, start_time';
   let sqlEnd = ') VALUES (?,?,?,?';
   conditions.push(req.body.title);
   conditions.push(req.body.address);
