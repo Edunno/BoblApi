@@ -197,9 +197,11 @@ const createEvent = async (req, res, next) => {
   conditions.push(req.body.startday);
   conditions.push(req.body.starttime);
 
-  //if (typeof req.body.endtime !== 'undefined') {
-
-  //}
+  if (typeof req.body.endtime !== 'undefined') {
+    sqlStart += ', end_time';
+    sqlEnd += ',?';
+    conditions.push(req.body.endtime);
+  }
 
   if (typeof req.body.description !== 'undefined') {
     sqlStart += ', description';
@@ -244,7 +246,7 @@ const createEvent = async (req, res, next) => {
 const createUserEvent = async (req, res, next) => {
   const pool = await mysqlssh.connect(conn.sshConfig, conn.dbConfig);
   let sql = 'INSERT INTO User_Event (event_id, user_id) VALUE (?,?);';
-  const results = await pool.query(sql, [req.body.eventID, req.body.userID], function (err, resilts, fields) {
+  const results = await pool.query(sql, [req.body.eventID, req.body.userID], function (err, results, fields) {
     if (err) throw err;
     mysqlssh.close();
     var resultSet = {
@@ -263,8 +265,17 @@ const createUserEvent = async (req, res, next) => {
 //Untested
 const createOrganizer = async (req, res, next) => {
   const pool = await mysqlssh.connect(conn.sshConfig, conn.dbConfig);
-  let sql = 'INSERT INTO Organizer (user_id) VALUE (?);';
-  const results = await pool.query(sql, [req.body.userID], function (err, resilts, fields) {
+  var conditions = [];
+  let sqlStart = 'INSERT INTO Organizer (user_id';
+  let sqlEnd = ') VALUE (?'
+  conditions.push(req.body.userid)
+  if (typeof req.body.name != 'undefined') {
+    sqlStart += ', name';
+    sqlEnd += ',?';
+    conditions.push(req.body.name);
+  }
+  let sql = sqlStart + sqlEnd + ');';
+  const results = await pool.query(sql, conditions, function (err, results, fields) {
     if (err) throw err;
     mysqlssh.close();
     var resultSet = {
@@ -284,7 +295,7 @@ const createOrganizer = async (req, res, next) => {
 const createUser = async (req, res, next) => {
   const pool = await mysqlssh.connect(conn.sshConfig, conn.dbConfig);
   let sql = 'INSERT INTO User (user_id) VALUE (?);';
-  const results = await pool.query(sql, [req.body.userID], function (err, resilts, fields) {
+  const results = await pool.query(sql, [req.body.userID], function (err, results, fields) {
     if (err) throw err;
     mysqlssh.close();
     var resultSet = {
@@ -304,7 +315,7 @@ const createUser = async (req, res, next) => {
 const deleteEvent = async (req, res, next) => {
   const pool = await mysqlssh.connect(conn.sshConfig, conn.dbConfig);
   let sql = 'DELETE FROM Event WHERE event_id = ?;';
-  const results = await pool.query(sql, [req.body.eventID], function (err, resilts, fields) {
+  const results = await pool.query(sql, [req.body.eventID], function (err, results, fields) {
     if (err) throw err;
     mysqlssh.close();
     var resultSet = {
