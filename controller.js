@@ -8,6 +8,11 @@ SQL functions in this file are built differently to the Boblberg standard.
 This is due to them being written with mysql-ssh package instead of mssql.
 */
 
+/*
+Get methods
+*/
+
+
 const getAllEvents = async (req, res, next) => {
   const pool = await mysqlssh.connect(conn.sshConfig, conn.dbConfig);
   const result = await pool.query('SELECT * FROM `Event`', function (err, results, fields) {
@@ -187,6 +192,10 @@ const getEventByUserId = async (req, res, next) => {
     });
 }
 
+/*
+Create methods
+*/
+
 const createEvent = async (req, res, next) => {
   const pool = await mysqlssh.connect(conn.sshConfig, conn.dbConfig);
   var conditions = [];
@@ -218,13 +227,6 @@ const createEvent = async (req, res, next) => {
     sqlEnd += ',?';
     conditions.push(req.body.organizerid);
   }
-  /*
-  if (typeof req.body !== 'undefined') {
-    sqlStart += '';
-    sqlEnd += ',?';
-    conditions.push();
-  }
-  */
   let sql = sqlStart + sqlEnd + ');';
   const results = await pool.query(sql, conditions, function (err, results, fields) {
     if (err) throw err;
@@ -273,6 +275,16 @@ const createOrganizer = async (req, res, next) => {
     sqlStart += ', name';
     sqlEnd += ',?';
     conditions.push(req.body.name);
+  }
+  if (typeof req.body.description != 'undefined') {
+    sqlStart += ', organizer_description';
+    sqlEnd += ',?';
+    conditions.push(req.body.description);
+  }
+  if (typeof req.body.address != 'undefined') {
+    sqlStart += ', organizer_address';
+    sqlEnd += ',?';
+    conditions.push(req.body.address);
   }
   let sql = sqlStart + sqlEnd + ');';
   const results = await pool.query(sql, conditions, function (err, results, fields) {
@@ -330,21 +342,7 @@ const deleteEvent = async (req, res, next) => {
       res.send('No connection to DB');
     });
 }
-/*
-const getEventByOrganizer = async (req, res, next) => {
-  const pool = await mysqlssh.connect(conn.sshConfig, conn.dbConfig);
-  let sql = ';';
-  const results = await pool.query(sql, [], function(err, results, fields) {
-    if (err) throw err;
-    res.send(results)
-  })
-  .catch(err => {
-    console.log(err);
-    console.log('Didn\'t work');
-    res.send('No connection to DB');
-  });
-}
-*/
+
 module.exports = {
   getAllEvents, createEvent, getEventById, getEventByOrganizer,
   getEventByDate, getEventByPlace, getOrgByUserID, getAllOrg, getUserByEventId,

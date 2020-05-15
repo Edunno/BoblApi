@@ -14,6 +14,7 @@ app.use('/api/Organizer', orgrouter);
 
 app.all("*", (req, res, next) => {
     console.log("Cannot find the specified route: " + req.route.path);
+    console.log("You have connected to the API, but the url is invalid.")
     next();
 });
 
@@ -31,27 +32,3 @@ app.use(async function (err, req, res, next) {
 app.listen(port, () => {
     console.log('Listening on port ' + port);
 })
-
-/*
-app.listen(port, () => {
-    console.log('Listening on port ' + port);
-})
-
-app.get('/Event', (req, res) => {
-    conn.getSomeData().then(result =>  {
-        console.log('Data send:\n' + result);
-        res.send(result);
-    }).catch(err => {
-        console.log('Promise was rejected'+err);
-    })
-})
-
-
-
-conn.getSomeData().then(result =>  {
-        console.log('Data send:\n' + result);
-        res.send(result);
-    }).catch(err => {
-        console.log('Promise was rejected'+err);
-    })
-*/
