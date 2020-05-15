@@ -9,8 +9,8 @@ const app = express();
 
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json())
-app.use('/Event', eventroutes);
-app.use('/Organizer', orgrouter);
+app.use('/api/Event', eventroutes);
+app.use('/api/Organizer', orgrouter);
 
 app.all("*", (req, res, next) => {
     console.log("Cannot find the specified route: " + req.route.path);
