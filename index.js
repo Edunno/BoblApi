@@ -1,12 +1,13 @@
 const express = require('express');
 const bodyparser = require('body-parser');
+const cors = require('cors');
 const eventroutes = require('./eventrouter');
 const orgrouter = require('./organizerrouter');
 
 const port = process.env.port || 2077;
 
 const app = express();
-
+app.use(cors());
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json())
 app.use('/api/Event', eventroutes);
